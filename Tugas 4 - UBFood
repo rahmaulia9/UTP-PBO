@@ -1,0 +1,82 @@
+package merchant;
+import java.util.Scanner;
+
+public class Main{
+ public static void main(String[] args){
+     DataMerchant.merc = DataMerchant.tambahMerchant(new Merchant(Merchant.namaMerchant = "Bakso Pak Sahid", Merchant.namaProduk = "Bakso", Merchant.hargaMakanan = 8000));
+     DataMerchant.merc = DataMerchant.tambahMerchant(new Merchant(Merchant.namaMerchant = "Nasgor Mblebes", Merchant.namaProduk = "Nasi Goreng Jawa", Merchant.hargaMakanan = 10000));
+     DataMerchant.merc = DataMerchant.tambahMerchant(new Merchant(Merchant.namaMerchant = "Ayam Geprek Kak Ros", Merchant.namaProduk = "Ayam Kota Ekstra Nasi", Merchant.hargaMakanan = 10000));
+     DataMerchant.tampilData();
+ }
+
+}
+class Merchant {
+
+    private String namaMerchant;
+    private String namaProduk;
+    private double hargaMakanan;
+
+
+    
+    public Merchant (String namaMerchant, String namaProduk, double hargaMakanan){
+        this.namaMerchant= namaMerchant;
+        this.namaProduk = namaProduk;
+        this.hargaMakanan = hargaMakanan;
+    
+    }
+    
+    public void setNamaMerchant (String namaMerchant){
+        this.namaMerchant=namaMerchant;
+    }
+
+    public String getNamaMerchant (){
+    return this.namaMerchant;
+    }
+
+    public void setNamaProduk (String namaProduk){
+        this.namaProduk=namaProduk;
+    }
+    public String getNamaProduk(){
+    return this.namaProduk;
+    }
+
+    public void setHargaMakanan (double hargaMakanan){
+        this.hargaMakanan=hargaMakanan;
+    }
+
+    public double getHargaMakanan (){
+    return this.hargaMakanan;
+    }
+}
+
+
+
+class DataMerchant{
+    static Scanner in = new Scanner(System.in);
+    static Merchant merc[] = new Merchant[0];
+    
+    
+public static Merchant[] tambahMerchant (Merchant merchant){
+    return;
+}
+
+
+public static void tampilData (){
+    for (Merchant mch1 : merc) {
+    System.out.println("====Tampilan Data Merchant UBFood===");
+    System.out.println("Nama Merchant \t : "+ mch1.getNamaMerchant());
+    System.out.println("Nama Produk \t : "+ mch1.getNamaProduk());
+    System.out.println("Harga \t \t : " + (int)mch1.getHargaMakanan());
+    }
+      
+    }
+
+public static Merchant cariMerchant (String nama) {
+    return;
+}
+public static void tampilMerchant (Merchant merchant) {
+}
+public static void updateMerchant (Merchant merchant) {
+
+}
+}

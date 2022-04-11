@@ -1,0 +1,47 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner input=new Scanner(System.in);
+        String word= input.nextLine(); 
+        int move=input.nextInt();
+        
+        int letters= word.length();
+        process(letters, move, word);
+       
+    }
+    
+    public static void process (int letters, int move, String word){
+        for (int i=0;i<letters;i++){
+           char cword = word.charAt(i);
+            int code = cword;
+            if (code==32){
+                System.out.print(" ");
+            }
+            int newCode=code+move;
+            if (newCode>122){
+                int fixed= newCode-122+96;
+                char newLetter=(char)fixed;
+                System.out.print(newLetter);
+                
+            } else if(newCode>97){
+                char newLetter=(char)newCode;
+                System.out.print(newLetter);
+                
+            } else if (newCode>90){
+                int fixed= newCode-90+64;
+                char newLetter=(char)fixed;
+                System.out.print(newLetter);
+            } else if (newCode>65){
+                char newLetter=(char)newCode;
+                System.out.print(newLetter);
+            }
+
+        }
+        
+        
+        
+    }
+}

@@ -1,0 +1,82 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) throws Exception {
+        Scanner input=new Scanner(System.in);
+
+        int choice = input.nextInt();
+
+        switch (choice){
+
+            case 1:
+
+            Shapes square = new Shapes();
+            square.sidea = input.nextInt();
+            square.sideb = square.sidea;
+               square.area=square.sidea*square.sideb;
+
+               System.out.println(square.area);
+
+                    break;
+
+            case 2:
+
+            Shapes triangle = new Shapes();
+            triangle.sidea = input.nextInt();
+            triangle.sideb = input.nextInt();
+            triangle.area=triangle.sidea*triangle.sideb/2;
+
+            System.out.println(triangle.area);
+
+                    break;
+
+            case 3:
+
+            Shapes circle = new Shapes();
+            circle.sidea=input.nextInt();
+            circle.sideb=circle.sidea;
+         
+            if (circle.sidea%7==0) {
+
+                double area=22/7*circle.sidea*circle.sideb;
+            int areacv=(int)area;
+
+            double areacv2=areacv;
+
+            System.out.println(areacv2);
+            
+
+                } else {
+
+            double area=3.14*circle.sidea*circle.sideb;
+
+                int areacv=(int)area;  
+
+                double areacv2=areacv;
+
+                System.out.println(areacv2);
+
+                    break;
+            }
+
+            default:
+
+                System.out.println("Input yang anda masukkan tidak sesuai");
+
+                break;
+
+                
+
+        }
+    }
+
+
+    }
+    
+class Shapes {
+            int sidea;
+            int sideb;
+            int area;
+        }

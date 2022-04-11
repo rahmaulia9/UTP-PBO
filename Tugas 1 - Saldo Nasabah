@@ -1,0 +1,22 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+       Scanner input = new Scanner (System.in);
+        float saldo, setoran;
+        saldo= input.nextFloat();
+        setoran = input.nextFloat();
+        processBegan (saldo,setoran);
+    }
+    
+    public static void processBegan(float saldo, float setoran){
+        float a=saldo+setoran;
+        float adm=a-7000;
+        float bonus=adm*5/10000;
+        float total=bonus+adm;
+        System.out.println(total);
+        
+    }
+}

@@ -1,0 +1,99 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner input=new Scanner(System.in);
+
+        int choice = input.nextInt();
+
+        switch (choice){
+
+            case 1:
+
+                byte side=input.nextByte();
+
+                square(side);
+
+                    break;
+
+            case 2:
+
+                byte sidea=input.nextByte();
+
+                byte sideb=input.nextByte();
+
+                triangle(sidea,sideb);
+
+                    break;
+
+            case 3:
+
+                byte radius=input.nextByte();
+
+                circle(radius);
+
+                    break;
+
+            default:
+
+                System.out.println("Input yang anda masukkan tidak sesuai");
+
+                break;
+
+                
+
+        }
+
+    }
+
+    
+
+    public static void square (byte side){
+
+        int area=side*side;
+
+        System.out.println(area);
+
+        
+
+    }
+
+    public static void triangle(byte sidea, byte sideb) {
+
+        int area=sidea*sideb/2;
+
+        System.out.println(area);
+
+    }
+
+    public static void circle (byte radius) {
+
+        if (radius%7==0) {
+
+                
+
+                double area=22/7*radius*radius;
+
+                int areacv=(int)area;  
+
+                double areacv2=areacv;
+
+            
+
+                System.out.println(areacv2);
+
+                } else {
+
+            double area=3.14*radius*radius;
+
+            int areacv=(int)area;
+
+            double areacv2=areacv;
+
+            System.out.println(areacv2);
+
+            }
+    }
+}

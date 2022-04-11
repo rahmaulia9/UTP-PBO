@@ -1,2 +1,2 @@
 # UTP-PBO
-Repository pengumpulan tugas pelengkap UTP
+Repository sisa-sisa harapan terakhir untuk mengkatrol nilai UTP

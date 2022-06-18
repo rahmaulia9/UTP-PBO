@@ -1,0 +1,97 @@
+package erigo;
+import java.util.Scanner;
+public class Erigo {
+    
+    public static void main(String[] args) {
+        System.out.println("Baju yang tersedia :");
+        System.out.println("Baju A dengan harga 100000");
+        System.out.println("Baju B dengan harga 125000");
+        System.out.println("Baju C dengan harga 175000");
+        
+        Scanner input = new Scanner (System.in);
+        System.out.print("Baju yang akan ada beli bertipe : ");
+        String baju = input.nextLine();
+        char type = baju.charAt(0);
+        
+        System.out.print("Jumlah baju yang akan anda beli adalah : ");
+        int amount = input.nextInt();
+        Calculation clothes = new Calculation();
+        
+        
+        switch (type) {
+            case 'A' :
+                
+                clothes.priceA(amount);
+          
+    break;
+            case 'B' :
+                clothes.priceB(amount);
+    break;
+            case 'C' :
+                clothes.priceC(amount);
+    break;
+    
+            default:
+        System.out.println("Data yang dimasukkan tidak valid");
+        break;
+    }
+
+   
+}
+    
+   
+}
+
+class Calculation {
+
+    Calculation (){}
+    
+    public void priceA(int a) {
+
+        if (a > 100) {
+int price = a * 95000;
+        System.out.println ("Jenis yang anda beli = a");
+        System.out.println ("Harga perbuah = 95000");
+        System.out.println ("Total harga = "+price);
+} else {
+int price = a * 100000;
+        System.out.println ("Jenis yang anda beli = a");
+        System.out.println ("Harga perbuah = 100000");
+        System.out.println ("Total harga = "+price);
+}
+        
+    }
+    
+    public void priceB(int a) {
+
+        if (a > 100) {
+int price = a * 95000;
+        System.out.println ("Jenis yang anda beli = b");
+        System.out.println ("Harga perbuah = 95000");
+        System.out.println ("Total harga = "+price);
+} else {
+int price = a * 120000;
+        System.out.println ("Jenis yang anda beli = b");
+        System.out.println ("Harga perbuah = 100000");
+        System.out.println ("Total harga = "+price);
+}
+        
+    }
+    
+    public void priceC(int a) {
+
+        if (a > 100) {
+int price = a * 95000;
+        System.out.println ("Jenis yang anda beli = c");
+        System.out.println ("Harga perbuah = 95000");
+        System.out.println ("Total harga = "+price);
+} else {
+int price = a * 160000;
+        System.out.println ("Jenis yang anda beli = c");
+        System.out.println ("Harga perbuah = 100000");
+        System.out.println ("Total harga = "+price);
+}
+        
+    }
+    
+}

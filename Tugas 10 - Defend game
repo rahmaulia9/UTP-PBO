@@ -1,0 +1,204 @@
+package exception.handling;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Selamat datang di dame defend FILKOM!!");
+        System.out.print("Silahkan masukkan nama player: ");
+        String nama = input.nextLine();
+        int role = 0;
+        int count = 0;
+        boolean start = true;
+        while (true) {
+            start = true;
+            System.out.println("List daftar karakter: "
+                    + "\n1. Magician"
+                    + "\n2. Healer"
+                    + "\n3. Warrior");
+            System.out.println("Silahkan pilih arakter yang Anda inginkan : ");
+            try {
+                String roles = input.nextLine();
+                role = Integer.valueOf(roles);
+            } catch (Exception e) {
+                start = false;
+            }
+
+            if (start && role > 0 && role < 4) {
+                break;
+            } else if (!start) {
+                System.out.println("Tolong masukkan angka ya !!");
+            } else {
+                System.out.println("Tolong pilih karakter yang tersedia !!");
+            }
+        }
+
+        Titan titan = new Titan();
+        Character chara = null;
+        System.out.printf("Selamat datang, "+nama+"!");
+
+        switch (role) {
+            case 1:
+                chara = new Magician();
+                chara.info();
+                break;
+            case 2:
+                chara = new Healer();
+                ((Healer) chara).info();
+                break;
+            case 3:
+                chara = new Warrior();
+                ((Warrior) chara).info();
+                break;
+            default:
+        }
+        while (titan.getHP() > 0 && chara.getHP() > 0) {
+            count++;
+            System.out.println("========== TURN "+count+"==========");
+            System.out.println("Enemy's HP\t: " + titan.getHP());
+
+            System.out.println(nama+"'s HP\t: "+chara.getHP());
+            if (count % 2 == 0 && chara instanceof Healer) {
+                ((Healer) chara).heal();
+            }
+            if (titan.attack() == true) {
+                
+                chara.receiveDamage(titan.getAttack());
+            }
+            if (chara.attack() == true) {
+                titan.receiveDamage(chara.getAttack());
+            }
+        }
+        if (titan.getHP() <= 0) {
+            titan.setHP(0);
+        } else if (chara.getHP() <= 0) {
+            chara.setHP(0);
+        }
+
+        String hasil = titan.getHP() <= 0 ? nama : "Titan";
+        System.out.println(hasil + " menang\n");
+        System.out.println("========== PLAYER ==========");
+        chara.info();
+        System.out.println("\n========== MUSUH ==========");
+        titan.info();
+    }
+}
+
+public class Magician extends Character {
+
+    public Magician() {
+        setHP(100);
+        setAttack(60);
+        setDefense(10);
+    }
+
+    @Override
+    public boolean attack() {
+        int chance = (int) (Math.random() * 100) + 1;
+        if (chance <= 35) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public void info() {
+        super.info();
+        System.out.println("Role\t: Magician");
+        System.out.println("HP\t: " + getHP());
+        System.out.println("Attack\t: " + getAttack());
+        System.out.println("Defense\t: " + getDefense());
+    }
+}
+
+public class Warrior extends Character {
+
+    public Warrior() {
+        setHP(80);
+        setAttack(25);
+        setDefense(30);
+    }
+
+    @Override
+    public boolean attack() {
+        int chance = (int) (Math.random() * 100) + 1;
+        if (chance <= 60) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public void info() {
+        super.info();
+        System.out.println("Role\t: Warrior");
+        System.out.println("HP\t: " + getHP());
+        System.out.println("Attack\t: " + getAttack());
+        System.out.println("Defense\t: " + getDefense());
+    }
+}
+
+public class Healer extends Character {
+
+    public Healer() {
+        setHP(70);
+        setAttack(10);
+        setDefense(10);
+    }
+
+    public void heal() {
+        setHP(getHP() + 25);
+    }
+
+    @Override
+    public boolean attack() {
+        int chance = (int) (Math.random() * 100) + 1;
+        if (chance <= 85) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public void info() {
+        super.info();
+        System.out.println("Role\t: Healer");
+        System.out.println("HP\t: " + getHP());
+        System.out.println("Attack\t: " + getAttack());
+        System.out.println("Defense\t: " + getDefense());
+    }
+
+}
+
+class Titan extends Character {
+
+    public Titan() {
+        setHP(200);
+        setAttack(45);
+    }
+
+    @Override
+    public boolean attack() {
+        int chance = (int) (Math.random() * 100) + 1;
+        if (chance <= 40) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public void info() {
+        super.info();
+        System.out.println("Role\t: Titan");
+        System.out.println("HP\t: " + getHP());
+        System.out.println("Attack\t: " + getAttack());
+        System.out.println("Defense\t: " + getDefense());
+    }
+}

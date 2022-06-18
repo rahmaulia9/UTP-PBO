@@ -1,0 +1,193 @@
+
+package polymorphismpbo;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        PegawaiTetap pt1 = new PegawaiTetap("Budi", "327532854937", 2000000.0);
+        PegawaiTetap pt2 = new PegawaiTetap("Anto", "327532854937", 2500000.0);
+        PegawaiTetap pt3 = new PegawaiTetap("Supri", "384027464937", 1500000.0);
+        System.out.println(pt1.toString());
+        System.out.println(pt2.toString());
+        System.out.println(pt3.toString());
+
+
+        PegawaiHarian ph1 = new PegawaiHarian("Edo", "347692984763957", 8500.0, 40);
+        PegawaiHarian ph2 = new PegawaiHarian("Tensei", "347692984739567", 9500.0, 43);
+        PegawaiHarian ph3 = new PegawaiHarian("Jutsu", "34769298028357525", 9000.0, 45);
+        System.out.println(ph1.toString());
+        System.out.println(ph2.toString());
+        System.out.println(ph3.toString());
+
+        
+        Sales s1 = new Sales("Tika", "3275389743067263", 50, 50000.0);
+        Sales s2 = new Sales("Sinta", "327503492645263", 30, 60000.0);
+        Sales s3 = new Sales("Fitri", "3275382956467263", 45, 40000.0);
+        System.out.println(s1.toString());
+        System.out.println(s2.toString());
+        System.out.println(s3.toString());
+    }
+
+}
+
+class PegawaiTetap extends Pegawai {
+
+    //atribut
+    private double upah;
+
+    //konstruktor
+    public PegawaiTetap(String nama, String noKTP, double upah) {
+        super(nama, noKTP);
+        this.upah = upah;
+    }
+
+    //setter getter
+    public void setUpah(double upah) {
+    }
+
+    public double getUpah() {
+        return upah;
+    }
+
+    //method yang menjadi polymorphism
+    @Override
+    public double gaji() {
+        return upah;
+    }
+
+    //output
+    @Override
+    public String toString() {
+        return "Nama\t\t: " + getNama() + "\n"
+                + "No. KTP\t\t: " + getNoKTP() + "\n"
+                + "Status\t\t: Pegawai tetap" + "\n"
+                + "Upah\t\t: " + getUpah() + "\n"
+                + "Pendapatan\t: Rp." + gaji() + "\n";
+    }
+}
+
+public class PegawaiHarian extends Pegawai {
+
+    //atribut
+    private double upahPerJam;
+    private int totalJam;
+
+    public PegawaiHarian(String nama, String noKTP, double upahPerJam,
+            int totalJam) {
+        super(nama, noKTP);
+        this.upahPerJam = upahPerJam;
+        this.totalJam = totalJam;
+    }
+
+    public double getUpahPerJam() {
+        return upahPerJam;
+    }
+
+    public int getTotalJam() {
+        return totalJam;
+    }
+
+    public void setUpahPerJam(double upahPerJam) {
+    }
+
+    public void setTotalJam(int totalJam) {
+    }
+    
+    @Override
+    public double gaji(){
+            if (totalJam <= 40) {
+            double gaji = totalJam * upahPerJam;
+            return gaji;
+        } else {
+            double gaji = (40 * upahPerJam) + (((totalJam - 40) * upahPerJam) * 1.5);
+            return gaji;
+        }
+    }
+    
+    
+        @Override
+    public String toString (){
+        return "Nama\t\t: "+ getNama()+"\n"
+                +"No. KTP\t\t: "+getNoKTP()+"\n"
+                +"Status\t\t: Pegawai harian"+"\n"
+                +"Upah/jam\t: "+getUpahPerJam()+"\n"
+                +"Total jam kerja\t: "+getTotalJam()+"\n"
+                +"Pendapatan\t: Rp."+gaji()+"\n";
+    }
+}
+
+class Sales extends Pegawai {
+
+    //atribut
+    private int penjualan;
+    private double komisi;
+
+    public Sales(String nama, String noKTP, int penjualan, double komisi) {
+        super(nama, noKTP);
+        this.penjualan = penjualan;
+        this.komisi = komisi;
+    }
+
+    public int getPenjualan() {
+        return penjualan;
+    }
+
+    public double getKomisi() {
+        return komisi;
+    }
+
+    public void setPenjualan(int penjualan) {
+    }
+
+    public void setKomisi(double komisi) {
+    }
+
+    @Override
+    public double gaji() {
+        return komisi * penjualan;
+    }
+
+    @Override
+    public String toString() {
+        return "Nama\t\t: " + getNama() + "\n"
+                + "No. KTP\t\t: " + getNoKTP() + "\n"
+                + "Status\t\t: Sales" + "\n"
+                + "Total penjualan\t: " + getPenjualan() + "\n"
+                + "Besaran komisi\t: " + getKomisi() + "\n"
+                + "Pendapatan\t: Rp." + gaji() + "\n";
+    }
+}
+
+class Pegawai {
+
+    //atribut
+    private String nama;
+    private String noKTP;
+
+    //konstruktor
+    public Pegawai(String nama, String noKTP) {
+        this.nama = nama;
+        this.noKTP = noKTP;
+    }
+
+    //setter getter
+    public String getNama() {
+        return nama;
+    }
+
+    public String getNoKTP() {
+        return noKTP;
+    }
+
+    //method polymorphism
+    public double gaji() {
+        return 0.0;
+    }
+
+    public String toString() {
+        return "Nama\t: " + getNama() + "\n"
+                + "No KTP\t: " + getNoKTP() + "\n"
+                + "Upah\t: " + gaji() + "\n";
+    }
+}

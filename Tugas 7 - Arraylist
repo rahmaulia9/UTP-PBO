@@ -1,0 +1,187 @@
+package arraylistpbo;
+
+public class Main {
+
+    public static void main(String[] args) {
+        CarRider ming = new CarRider("Lin Ming",19,"0800000");
+        CarRider youhan = new CarRider("Bei Youhan",20,"081111");
+        CarRider ling = new CarRider("Ling'er",31,"082222");
+        CarRider lina = new CarRider("Lina",22,"08333");
+        
+        CarData data = new CarData();
+        data.addCar("SUV", "N 1111 AB", "Honda");
+        data.addCar("SPORT", "N 2222 AB", "SCC Tuatara");
+        data.addCar("TRUCK", "N 333 AB", "Suzuki");
+        data.addCar("SEDAN", "N 444 AB", "Toyota");
+        
+        data.listOfCar();
+        System.out.println("");
+        
+        RentArchive arsip = new RentArchive();
+        arsip.Rent(ming,data.carList.get(1),9);
+        arsip.Rent(youhan,data.carList.get(0),3);
+        arsip.Rent(ling,data.carList.get(1), 2);
+        arsip.Rent(lina,data.carList.get(2),4);
+        System.out.println("");
+        
+        arsip.info();
+
+    }
+    
+}
+
+
+class Car {
+    private String carType;    
+    private String polNum;
+    private String merk;
+    private boolean status;
+
+
+    public Car (String carType, String polNum, String merk, boolean status){
+    this.carType = carType;
+    this.polNum = polNum;
+    this.merk = merk;
+    this.status = status;
+    }
+
+    public String getCarType() {
+        return carType;
+    }
+
+    public void setCarType(String carType) {
+        this.carType = carType;
+    }
+
+    public String getPolNum() {
+        return polNum;
+    }
+
+    public String getMerk() {
+        return merk;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+    
+
+}
+
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+ class CarData {
+     Scanner in = new Scanner(System.in);
+     ArrayList<Car> carList = new ArrayList<>(); 
+     
+     
+     
+    void addCar (String carType,String polNum, String merk){        
+        carList.add(new Car(carType, polNum, merk, true));
+        
+    }
+    void listOfCar(){
+        
+        System.out.println("DAFTAR MOBIL");
+        
+        for (Car car :carList){
+            System.out.println("======");
+            System.out.println("TIPE MOBIL\t: "+car.getCarType());
+            System.out.println("NO. POLISI\t: "+car.getPolNum());
+            System.out.println("MERK MOBIL\t: "+car.getMerk());
+        }
+        
+
+    }
+}
+
+
+public class CarRent {
+    
+
+    private int rentDur;
+    Car car;
+    CarRider rider;
+    
+    public CarRent(CarRider rider, Car car, int rentDur){}
+    
+    public CarRider getRider(){
+        return rider;
+    }
+    public Car getCar(){
+        return car;
+    }
+    
+    public int getRentDur(){
+        return rentDur;
+    }
+    
+}
+
+
+class CarRider {
+    private String name;
+    private int age;
+    private String phone;
+    
+    public CarRider(String name, int age, String phone){
+    this.name=name;
+    this.age=age;
+    this.phone=phone;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+    
+    
+}
+
+
+import java.util.Iterator;
+import java.util.ArrayList;
+
+class RentArchive {
+    
+    private ArrayList<CarRent> rentData = new ArrayList<> ();
+    
+    void Rent(CarRider rider, Car car, int rentDur){
+        
+        if (car.isStatus()){
+            car.setStatus(false);
+            rentData.add(new CarRent (rider, car, rentDur));
+            System.out.println("Mobil berhasil disewa");
+        } else{
+            System.out.println("Maaf, mobil sudah disewa.");
+        }    
+    }
+        
+    void info(){
+            Iterator<CarRent> itr = rentData.iterator();
+            System.out.println("-----------------------");
+            System.out.println("INFORMASI PELANGGAN");
+            System.out.println("-----------------------");
+            while (itr.hasNext()) {
+                CarRent carrent = itr.next();
+
+                System.out.println("TIPE MOBIL  :   " + carrent.getCar().getCarType());
+                System.out.println("NO. POLISI  :   " + carrent.getCar().getPolNum());
+                System.out.println("LAMA RENTAL :   " + carrent.getRentDur());
+                System.out.println("-----------------------");
+                }
+    }
+}

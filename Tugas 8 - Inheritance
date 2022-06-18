@@ -1,0 +1,353 @@
+
+package inheritanceprak;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        //instansiasi objek dan pemanggilan method untuk menampilkan output
+        Manusia man1 = new Manusia("Aku", "3923842934", true, true);
+        Manusia man2 = new Manusia("Kamu", "5079832934", false, true);
+        Manusia man3 = new Manusia("Kita", "8396470482", false, false);
+        System.out.println(man1.toString());
+        System.out.println(man2.toString());
+        System.out.println(man3.toString());
+
+        MahasiswaFilkom mhs1 = new MahasiswaFilkom("I Putu Yoga",
+                "351923848239", false, false, "205150601111018", 3.70);
+        MahasiswaFilkom mhs2 = new MahasiswaFilkom("Sonic The Hedgehog",
+                "351923930761", true, false, "195150401111018", 3.20);
+        MahasiswaFilkom mhs3 = new MahasiswaFilkom("Huggy Wuggy",
+                "839613848239", true, true, "215150301111018", 2.94);
+        System.out.println(mhs1.toString());
+        System.out.println(mhs2.toString());
+        System.out.println(mhs3.toString());
+
+        Pekerja pekerja1 = new Pekerja(7, 22, "195102439283", "Iqbal Biondy ",
+                "351717969", true, true);
+        Pekerja pekerja2 = new Pekerja(8, 28, "425102355803", "Tails The Fox",
+                "556717269", true, false);
+        Pekerja pekerja3 = new Pekerja(10, 20, "542902839283", "Shadow The Hedhehog",
+                "652717269", false, false);
+        System.out.println(pekerja1.toString());
+        System.out.println(pekerja2.toString());
+        System.out.println(pekerja3.toString());
+
+        Manajer manajer1 = new Manajer(1500, 9, 20, "206837283728", "Lyra Hertin",
+                "351707384392", false, false);
+        Manajer manajer2 = new Manajer(4099, 7, 23, "369837483728", "Dr. Eggman",
+                "351704290492", false, true);
+        Manajer manajer3 = new Manajer(2012, 8, 26, "502837983728", "Knuckles The Echidna",
+                "332977384392", true, false);
+        System.out.println(manajer1.toString());
+        System.out.println(manajer2.toString());
+        System.out.println(manajer3.toString());
+
+    }
+
+}
+
+
+class Manusia {
+
+    private String nama;
+    private String NIK;
+    private boolean jenisKelamin;
+    private boolean menikah;
+
+    public Manusia(String nama, String NIK, boolean jenisKelamin, boolean menikah) {
+        this.nama = nama;
+        this.NIK = NIK;
+        this.jenisKelamin = jenisKelamin;
+        this.menikah = menikah;
+    }
+
+    public String getNama() {
+        return nama;
+    }
+
+    public void setNama(String nama) {
+    }
+
+    public String getNIK() {
+        return NIK;
+    }
+
+    public void setNIK(String NIK) {
+    }
+
+    public boolean isJenisKelamin() {
+        return jenisKelamin;
+    }
+
+    public void setJenisKelamin(boolean jenisKelamin) {
+    }
+
+    public boolean isMenikah() {
+        return menikah;
+    }
+
+    public void setMenikah(boolean menikah) {
+
+    }
+
+    public double getTunjangan() {
+        if (this.menikah) {
+            if (this.jenisKelamin) {
+                return 25.0;
+            } else {
+                return 20.0;
+            }
+        } else {
+            return 15.0;
+        }
+    }
+
+    public double getPendapatan() {
+        return getTunjangan();
+    }
+
+    @Override
+    public String toString() {
+        String gender;
+        if (this.jenisKelamin) {
+            gender = "Laki-laki";
+        } else {
+            gender = "Perempuan";
+        }
+        return "Nama\t\t: " + getNama() + "\n"
+                + "NIK\t\t: " + getNIK() + "\n"
+                + "Jenis kelamin\t: " + gender + "\n"
+                + "Pendapatan\t: $" + getTunjangan()+"\n";
+
+    }
+
+}
+
+class MahasiswaFilkom extends Manusia {
+
+    private String NIM;
+    private double IPK;
+
+    public MahasiswaFilkom(String nama, String NIK, boolean jenisKelamin,
+            boolean menikah, String NIM, double IPK) {
+        super(nama, NIK, jenisKelamin, menikah);
+        this.NIM = NIM;
+        this.IPK = IPK;
+    }
+
+    public String getNIM() {
+        return NIM;
+    }
+
+    public void setNIM(String NIM) {
+    }
+
+    public double getIPK() {
+        return IPK;
+    }
+
+    public void setIPK(double IPK) {
+    }
+
+    public String getStatus() {
+        String status;
+        switch (this.NIM.charAt(6) - '0') {
+            case 2:
+                status = "Teknik Meniup Gelembung" + ", 20" + this.NIM.charAt(0) + this.NIM.charAt(1);
+                break;
+            case 3:
+                status = "Teknik Berburu Ubur-ubur" + ", 20" + this.NIM.charAt(0) + this.NIM.charAt(1);
+                break;
+            case 4:
+                status = "Sistem Perhamburgeran" + ", 20" + this.NIM.charAt(0) + this.NIM.charAt(1);
+                break;
+            case 6:
+                status = "Pendidikan Chum Bucket" + ", 20" + this.NIM.charAt(0) + this.NIM.charAt(1);
+                break;
+            case 7:
+                status = "Teknologi Telepon Kerang" + ", 20" + this.NIM.charAt(0) + this.NIM.charAt(1);
+                break;
+            default:
+                status = "NIM salah";
+        }
+        return status;
+    }
+
+    public double getBeasiswa() {
+        if (this.IPK >= 3.51) {
+            return 75.0 + getTunjangan();
+
+        } else if (this.IPK >= 3.0) {
+            return 50.0 + getTunjangan();
+        } else if (this.IPK <=3.0){
+            return 0.0 +getTunjangan();
+        }
+        return getBeasiswa();
+    }
+
+    @Override
+    public String toString() {
+        String gender;
+        if (this.isJenisKelamin()) {
+            gender = "Laki-laki";
+        } else {
+            gender = "Perempuan";
+        }
+        return "Nama\t\t: " + getNama() + "\n"
+                + "NIK\t\t: " + getNIK() + "\n"
+                + "Jenis kelamin\t: " + gender + "\n"
+                + "Pendapatan\t: $" + getBeasiswa() + "\n"
+                + "IPK\t\t: " + getIPK() + "\n"
+                + "NIM\t\t: " + getNIM() + "\n"
+                + "Status\t\t: " + getStatus()+"\n";
+    }
+}
+
+class Pekerja extends Manusia {
+
+    private double gaji;
+    private double bonus;
+    private int jamKerja;
+    private int hariKerja;
+    private String NIP;
+
+    //konstruktor
+    public Pekerja(int jamKerja, int hariKerja, String NIP, String nama,
+            String NIK, boolean jenisKelamin, boolean menikah) {
+
+        super(nama, NIK, jenisKelamin, menikah);
+        this.gaji = gaji;
+        this.bonus = bonus;
+        this.jamKerja = jamKerja;
+        this.hariKerja = hariKerja;
+        this.NIP = NIP;
+    }
+
+    //setter getter
+    public double getGaji() {
+        gaji = hariKerja * jamKerja * 15;
+        return gaji;
+    }
+
+    public void setGaji(double gaji) {
+    }
+
+    public void setBonus(double bonus) {
+    }
+
+    public int getJamKerja() {
+        return jamKerja;
+    }
+
+    public void setJamKerja(int jamKerja) {
+    }
+
+    public int getHariKerja() {
+        return hariKerja;
+    }
+
+    public void setHariKerja(int hariKerja) {
+    }
+
+    public String getNIP() {
+        return NIP;
+    }
+
+    public void setNIP(String NIP) {
+    }
+
+    public double getBonus() {
+        double bonusa, bonusb;
+        //bonus libur
+        bonusa = (getHariKerja() - 20) * getJamKerja() * 20;
+
+        //bonus lembur
+        if (getJamKerja() > 7) {
+            bonusb = (getJamKerja() - 7) * (getHariKerja() - (getHariKerja() - 20)) * 7;
+            bonus = bonusa + bonusb;
+        } else if (getJamKerja() <= 7) {
+            bonusb = 0.0;
+            bonus = bonusa + bonusb;
+        }
+
+        return bonus;
+    }
+
+    public String getStatus() {
+        String status;
+        String[] cabang = {"Mondstat", "Liyue", "Inazuma", "Sumeru", "Fontaine",
+            "Natlan", "Snezhnaya"};
+
+        String[] dept = {"Pemasaran", "Humas", "Riset", "Teknologi", "Personalia",
+            "Akademik", "Administrasi", "Operasional", "Pembangunan"};
+
+        status = dept[this.NIP.charAt(6) - 1 - '0'] + ", " + cabang[this.NIP.charAt(0) - 1 - '0']
+                + " Cabang ke-" + this.NIP.charAt(2);
+        return status;
+    }
+
+    @Override
+    public String toString() {
+        String gender;
+        double pendapatan;
+        pendapatan = getPendapatan() + getBonus() + getGaji();
+        if (this.isJenisKelamin()) {
+            gender = "Laki-laki";
+        } else {
+            gender = "Perempuan";
+        }
+        return "Nama\t\t: " + getNama() + "\n"
+                + "NIK\t\t: " + getNIK() + "\n"
+                + "Jenis kelamin\t: " + gender + "\n"
+                + "Pendapatan\t: $" + pendapatan + "\n"
+                + "Bonus\t\t: $" + getBonus() + "\n"
+                + "Gaji\t\t: $" + getGaji() + "\n"
+                + "Status\t\t: " + getStatus() + "\n";
+
+    }
+
+}
+
+class Manajer extends Pekerja {
+
+    private int lamaKerja;
+
+    public Manajer(int lamaKerja, int jamKerja,
+            int hariKerja, String NIP, String nama, String NIK, boolean jenisKelamin,
+            boolean menikah) {
+
+        super(jamKerja, hariKerja, NIP, nama, NIK, jenisKelamin, menikah);
+        this.lamaKerja = lamaKerja;
+
+    }
+
+    public int getLamaKerja() {
+        return lamaKerja;
+    }
+
+    public void setLamaKerja(int lamaKerja) {
+    }
+
+    @Override
+    public String toString() {
+        String gender;
+        double pendapatan;
+        pendapatan = getPendapatan() + getBonus() + (getBonus() * 30 / 100) + getGaji() + 15.0;
+        if (this.isJenisKelamin()) {
+            gender = "Laki-laki";
+        } else {
+            gender = "Perempuan";
+        }
+        return "Nama\t\t: " + getNama() + "\n"
+                + "NIK\t\t: " + getNIK() + "\n"
+                + "Jenis kelamin\t: " + gender + "\n"
+                + "Pendapatan\t: $" + pendapatan + "\n"
+                + "Bonus\t\t: $" + getBonus() + "\n"
+                + "Gaji\t\t: $" + getGaji() + "\n"
+                + "Status\t\t: " + getStatus() + "\n"
+                + "Lama kerja\t: " + getLamaKerja() + " hari\n";
+
+    }
+
+}
